@@ -4,8 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.tom.hunter.framework.UseCase;
 import com.tom.hunter.framework.data.DataRepository;
-import com.tom.hunter.framework.data.remote.IRemoteDataSource;
-import com.tom.hunter.framework.model.History;
+import com.tom.hunter.model.History;
 import com.tom.hunter.model.Job;
 
 import java.util.List;

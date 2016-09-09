@@ -1,4 +1,4 @@
-package com.tom.hunter.framework.model;
+package com.tom.hunter.model;
 
 /**
  * Created by txu1 on 9/9/2016.

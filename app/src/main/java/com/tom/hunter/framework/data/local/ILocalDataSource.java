@@ -3,12 +3,9 @@ package com.tom.hunter.framework.data.local;
 import android.support.annotation.NonNull;
 
 import com.tom.hunter.framework.data.IDataSource;
-import com.tom.hunter.framework.model.History;
-import com.tom.hunter.model.Company;
-import com.tom.hunter.model.Job;
+import com.tom.hunter.model.History;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by txu1 on 9/2/2016.

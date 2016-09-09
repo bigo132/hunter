@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.tom.hunter.framework.data.local.ILocalDataSource;
 import com.tom.hunter.framework.data.remote.IRemoteDataSource;
-import com.tom.hunter.framework.model.History;
+import com.tom.hunter.model.History;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

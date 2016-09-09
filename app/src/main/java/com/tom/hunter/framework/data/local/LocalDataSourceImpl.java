@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 
-import com.tom.hunter.framework.model.History;
+import com.tom.hunter.model.History;
 
 import java.util.ArrayList;
 import java.util.List;
