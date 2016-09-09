@@ -7,35 +7,38 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name="com.tom.hunter.JobApplication"
+        android:name=".JobApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
-            android:name="com.tom.hunter.modules.MainActivity"
+            android:name=".modules.MainActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
         <activity
-            android:name="com.tom.hunter.modules.detail.job.JobDetailActivity"
+            android:name=".modules.detail.job.JobDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modules.detail.company.CompanyDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modules.user.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".modules.user.ForgotActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.tom.hunter.modules.detail.company.CompanyDetailActivity"
+            android:name=".modules.user.RegisterActivity"
             android:screenOrientation="portrait" />
-
     </application>
-
 
 </manifest>
