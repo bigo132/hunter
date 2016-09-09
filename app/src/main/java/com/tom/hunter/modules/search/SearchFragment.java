@@ -11,8 +11,12 @@ import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.tom.hunter.R;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -21,9 +25,19 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class SearchFragment extends Fragment implements SearchContract.View {
 
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    @BindView(R.id.searchView)
+    SearchView searchView;
 
-    private ViewPager mViewPager;
+    @BindView(R.id.submitBtn)
+    ImageView submitBtn;
+
+    @BindView(R.id.tabs)
+    TabLayout tabLayout;
+
+    @BindView(R.id.viewPager)
+    ViewPager mViewPager;
+
+    private SectionsPagerAdapter mSectionsPagerAdapter;
 
     private SearchContract.Presenter mPresenter;
 
@@ -36,7 +50,7 @@ public class SearchFragment extends Fragment implements SearchContract.View {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
@@ -44,15 +58,16 @@ public class SearchFragment extends Fragment implements SearchContract.View {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
+        ButterKnife.bind(this, view);
 
-        SearchView searchView = (SearchView) view.findViewById(R.id.searchView);
         searchView.onActionViewExpanded();
+        searchView.clearFocus();
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(this.getChildFragmentManager());
-        mViewPager = (ViewPager) view.findViewById(R.id.container);
+        mViewPager = (ViewPager) view.findViewById(R.id.viewPager);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.tabs);
+        tabLayout = (TabLayout) view.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
         return view;
@@ -71,7 +86,7 @@ public class SearchFragment extends Fragment implements SearchContract.View {
 
         @Override
         public Fragment getItem(int position) {
-            return PlaceholderFragment.newInstance(position + 1);
+            return SearchHistoryFragment.newInstance();
         }
 
         @Override

@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.tom.hunter.framework.UseCase;
 import com.tom.hunter.framework.data.DataRepository;
-import com.tom.hunter.framework.data.IDataSource;
+import com.tom.hunter.framework.data.remote.IRemoteDataSource;
 import com.tom.hunter.model.Job;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class GetPromptJobs extends UseCase<UseCase.RequestValues, GetPromptJobs.
 
     @Override
     protected void executeUseCase(RequestValues requestValues) {
-        mDataRepository.getPromptJobs(new IDataSource.LoadJobsCallback() {
+        mDataRepository.getPromptJobs(new IRemoteDataSource.LoadJobsCallback() {
             @Override
             public void onJobsLoaded(List<Job> jobs) {
                 ResponseValue responseValue = new ResponseValue(jobs);

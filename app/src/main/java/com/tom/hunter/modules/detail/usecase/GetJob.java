@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.tom.hunter.framework.UseCase;
 import com.tom.hunter.framework.data.DataRepository;
-import com.tom.hunter.framework.data.IDataSource;
+import com.tom.hunter.framework.data.remote.IRemoteDataSource;
 import com.tom.hunter.model.Job;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -12,18 +12,18 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Created by txu1 on 9/6/2016.
  */
-public class GetJobDetail extends UseCase<GetJobDetail.RequestValues, GetJobDetail.ResponseValue> {
+public class GetJob extends UseCase<GetJob.RequestValues, GetJob.ResponseValue> {
 
     private final DataRepository mDataRepository;
 
-    public GetJobDetail(@NonNull DataRepository dataRepository) {
+    public GetJob(@NonNull DataRepository dataRepository) {
         mDataRepository = checkNotNull(dataRepository, "dataRepository cannot be null!");
     }
 
     @Override
     protected void executeUseCase(RequestValues requestValues) {
         String jobId = requestValues.getJobId();
-        mDataRepository.getDetailJob(jobId, new IDataSource.GetJobCallback() {
+        mDataRepository.getDetailJob(jobId, new IRemoteDataSource.GetJobCallback() {
             @Override
             public void onJobLoaded(Job job) {
                 ResponseValue responseValue = new ResponseValue(job);

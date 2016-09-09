@@ -1,11 +1,15 @@
 package com.tom.hunter.modules;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import com.roughike.bottombar.BottomBar;
@@ -49,11 +53,9 @@ public class MainActivity extends AppCompatActivity {
             public void onTabSelected(@IdRes int tabId) {
                 if (tabId == R.id.tab_home) {
                     viewPager.setCurrentItem(0, true);
-                }
-                else if (tabId == R.id.tab_search) {
+                } else if (tabId == R.id.tab_search) {
                     viewPager.setCurrentItem(1, true);
-                }
-                else if (tabId == R.id.tab_profile) {
+                } else if (tabId == R.id.tab_profile) {
                     viewPager.setCurrentItem(2, true);
                 }
             }
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         fragments.add(HomeFragment.newInstance());
         fragments.add(SearchFragment.newInstance());
         fragments.add(ProfileFragment.newInstance());
-        viewPager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
+        viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
                 return fragments.get(position);

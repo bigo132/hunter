@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.tom.hunter.framework.UseCase;
 import com.tom.hunter.framework.UseCaseHandler;
-import com.tom.hunter.framework.data.IDataSource;
+import com.tom.hunter.framework.data.remote.IRemoteDataSource;
 import com.tom.hunter.model.Job;
 import com.tom.hunter.modules.home.usecase.GetAllJobs;
 import com.tom.hunter.modules.home.usecase.GetPromptJobs;
@@ -50,7 +50,7 @@ public class HomePresenter implements HomeContract.Presenter {
     }
 
     /**
-     * @param forceUpdate   Pass in true to refresh the data in the {@link IDataSource}
+     * @param forceUpdate   Pass in true to refresh the data in the {@link IRemoteDataSource}
      * @param showLoadingUI Pass in true to display a loading icon in the UI
      */
     private void loadAllJobs(boolean forceUpdate, final boolean showLoadingUI) {

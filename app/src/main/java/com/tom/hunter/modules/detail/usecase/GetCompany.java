@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.tom.hunter.framework.UseCase;
 import com.tom.hunter.framework.data.DataRepository;
-import com.tom.hunter.framework.data.IDataSource;
+import com.tom.hunter.framework.data.remote.IRemoteDataSource;
 import com.tom.hunter.model.Company;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -12,17 +12,17 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Created by txu1 on 9/6/2016.
  */
-public class GetCompanyDetail extends UseCase<UseCase.RequestValues, GetCompanyDetail.ResponseValue> {
+public class GetCompany extends UseCase<UseCase.RequestValues, GetCompany.ResponseValue> {
 
     private final DataRepository mDataRepository;
 
-    public GetCompanyDetail(@NonNull DataRepository dataRepository) {
+    public GetCompany(@NonNull DataRepository dataRepository) {
         mDataRepository = checkNotNull(dataRepository, "dataRepository cannot be null!");
     }
 
     @Override
     protected void executeUseCase(RequestValues requestValues) {
-        mDataRepository.getDetailCompany(new IDataSource.GetCompanyCallback() {
+        mDataRepository.getDetailCompany(new IRemoteDataSource.GetCompanyCallback() {
             @Override
             public void onCompanyLoaded(Company company) {
                 ResponseValue responseValue = new ResponseValue(company);

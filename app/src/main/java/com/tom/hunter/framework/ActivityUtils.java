@@ -16,10 +16,13 @@
 
 package com.tom.hunter.framework;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

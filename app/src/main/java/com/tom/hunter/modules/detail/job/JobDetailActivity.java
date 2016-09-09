@@ -19,8 +19,6 @@ import com.tom.hunter.modules.common.AppConstact;
  */
 public class JobDetailActivity extends AppCompatActivity {
 
-    private JobDetailPresenter detailPresenter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +35,7 @@ public class JobDetailActivity extends AppCompatActivity {
         }
 
         // Create the presenter
-        detailPresenter = new JobDetailPresenter(
+        new JobDetailPresenter(
                 Injection.provideUseCaseHandler(),
                 detailFragment,
                 Injection.provideGetDetailJob(getApplicationContext()));

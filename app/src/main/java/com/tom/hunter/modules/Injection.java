@@ -7,11 +7,13 @@ import com.tom.hunter.JobApplication;
 import com.tom.hunter.framework.UseCaseHandler;
 import com.tom.hunter.framework.data.DataRepository;
 import com.tom.hunter.framework.data.FakeJobsRemoteDataSource;
-import com.tom.hunter.framework.data.local.LocalDataSource;
-import com.tom.hunter.modules.detail.usecase.GetCompanyDetail;
-import com.tom.hunter.modules.detail.usecase.GetJobDetail;
+import com.tom.hunter.framework.data.local.LocalDataSourceImpl;
+import com.tom.hunter.modules.detail.usecase.GetCompany;
+import com.tom.hunter.modules.detail.usecase.GetJob;
 import com.tom.hunter.modules.home.usecase.GetAllJobs;
 import com.tom.hunter.modules.home.usecase.GetPromptJobs;
+import com.tom.hunter.modules.search.usecase.GetHistories;
+import com.tom.hunter.modules.search.usecase.SaveHistory;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -23,13 +25,13 @@ public class Injection {
     public static DataRepository provideDataRepository(@NonNull Context context) {
         checkNotNull(context);
         return DataRepository.getInstance(FakeJobsRemoteDataSource.getInstance(),
-                LocalDataSource.getInstance(context));
+                LocalDataSourceImpl.getInstance(context));
     }
 
     public static DataRepository provideDataRepository() {
         Context context = JobApplication.getInstance();
         return DataRepository.getInstance(FakeJobsRemoteDataSource.getInstance(),
-                LocalDataSource.getInstance(context));
+                LocalDataSourceImpl.getInstance(context));
     }
 
     public static UseCaseHandler provideUseCaseHandler() {
@@ -44,11 +46,19 @@ public class Injection {
         return new GetAllJobs(provideDataRepository());
     }
 
-    public static GetJobDetail provideGetDetailJob(@NonNull Context context) {
-        return new GetJobDetail(provideDataRepository(context));
+    public static GetJob provideGetDetailJob(@NonNull Context context) {
+        return new GetJob(provideDataRepository(context));
     }
 
-    public static GetCompanyDetail provideGetDetailCompany(@NonNull Context context) {
-        return new GetCompanyDetail(provideDataRepository(context));
+    public static GetCompany provideGetDetailCompany(@NonNull Context context) {
+        return new GetCompany(provideDataRepository(context));
+    }
+
+    public static GetHistories provideGetHistories(@NonNull Context context) {
+        return new GetHistories(provideDataRepository(context));
+    }
+
+    public static SaveHistory provideSaveHistory(@NonNull Context context) {
+        return new SaveHistory(provideDataRepository(context));
     }
 }

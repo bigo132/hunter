@@ -2,18 +2,16 @@ package com.tom.hunter.framework.data.remote;
 
 import android.support.annotation.NonNull;
 
-import com.tom.hunter.framework.data.IDataSource;
-
 /**
  * Created by txu1 on 9/2/2016.
  */
-public class RemoteDataSource implements IDataSource {
+public class RemoteDataSourceImpl implements IRemoteDataSource {
 
-    private static RemoteDataSource INSTANCE;
+    private static RemoteDataSourceImpl INSTANCE;
 
-    public static RemoteDataSource getInstance() {
+    public static RemoteDataSourceImpl getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new RemoteDataSource();
+            INSTANCE = new RemoteDataSourceImpl();
         }
         return INSTANCE;
     }

@@ -83,8 +83,6 @@ public class JobDetailFragment extends Fragment implements JobDetailContract.Vie
 
     private JobDetailContract.Presenter mPresenter;
 
-    private CompositeSubscription subscriptions;
-
     public JobDetailFragment() {
         // Required empty public constructor
     }

@@ -2,6 +2,7 @@ package com.tom.hunter.framework.data;
 
 import android.support.annotation.NonNull;
 
+import com.tom.hunter.framework.data.remote.IRemoteDataSource;
 import com.tom.hunter.model.Address;
 import com.tom.hunter.model.Company;
 import com.tom.hunter.model.Job;
@@ -16,7 +17,7 @@ import java.util.Map;
 /**
  * Created by txu1 on 9/5/2016.
  */
-public class FakeJobsRemoteDataSource implements IDataSource {
+public class FakeJobsRemoteDataSource implements IRemoteDataSource {
 
     private static final List<Job> TASKS_SERVICE_DATA = new LinkedList<>();
     private static final Map<Integer, List<Job>> TASKS_ALL_DATA = new HashMap<>();

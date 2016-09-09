@@ -1,10 +1,11 @@
-package com.tom.hunter.modules.home.usecase;
+package com.tom.hunter.modules.search.usecase;
 
 import android.support.annotation.NonNull;
 
 import com.tom.hunter.framework.UseCase;
 import com.tom.hunter.framework.data.DataRepository;
 import com.tom.hunter.framework.data.remote.IRemoteDataSource;
+import com.tom.hunter.framework.model.History;
 import com.tom.hunter.model.Job;
 
 import java.util.List;
@@ -15,28 +16,30 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Created by txu1 on 9/5/2016.
  */
-public class GetAllJobs extends UseCase<UseCase.RequestValues, GetAllJobs.ResponseValue> {
+public class SaveHistory extends UseCase<SaveHistory.RequestValues, SaveHistory.ResponseValue> {
 
     private final DataRepository mDataRepository;
 
-    public GetAllJobs(@NonNull DataRepository dataRepository) {
+    public SaveHistory(@NonNull DataRepository dataRepository) {
         mDataRepository = checkNotNull(dataRepository, "dataRepository cannot be null!");
     }
 
     @Override
     protected void executeUseCase(RequestValues requestValues) {
-        mDataRepository.getAllJobs(new IRemoteDataSource.LoadAllJobsCallback() {
-            @Override
-            public void onJobsLoaded(Map<Integer, List<Job>> jobs) {
-                ResponseValue responseValue = new ResponseValue(jobs);
-                getUseCaseCallback().onSuccess(responseValue);
-            }
+        mDataRepository.saveHistory(requestValues.getHistory());
+    }
 
-            @Override
-            public void onDataNotAvailable() {
-                getUseCaseCallback().onError();
-            }
-        });
+    public static final class RequestValues implements UseCase.RequestValues {
+
+        private final History mHistory;
+
+        public RequestValues(@NonNull History history) {
+            mHistory = checkNotNull(history, "history cannot be null!");
+        }
+
+        public History getHistory() {
+            return mHistory;
+        }
     }
 
     public static final class ResponseValue implements UseCase.ResponseValue {

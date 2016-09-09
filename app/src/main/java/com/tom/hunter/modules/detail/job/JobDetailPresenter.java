@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import com.tom.hunter.framework.UseCase;
 import com.tom.hunter.framework.UseCaseHandler;
 import com.tom.hunter.model.Job;
-import com.tom.hunter.modules.detail.usecase.GetJobDetail;
+import com.tom.hunter.modules.detail.usecase.GetJob;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -16,11 +16,11 @@ public class JobDetailPresenter implements JobDetailContract.Presenter {
 
     private final JobDetailContract.View mDetailView;
 
-    private final GetJobDetail mDetailJob;
+    private final GetJob mDetailJob;
 
     private final UseCaseHandler mUseCaseHandler;
 
-    public JobDetailPresenter(@NonNull UseCaseHandler useCaseHandler, @NonNull JobDetailContract.View detailView, @NonNull GetJobDetail getJobDetail) {
+    public JobDetailPresenter(@NonNull UseCaseHandler useCaseHandler, @NonNull JobDetailContract.View detailView, @NonNull GetJob getJobDetail) {
         mUseCaseHandler = checkNotNull(useCaseHandler, "useCaseHandler cannot be null");
         mDetailJob = checkNotNull(getJobDetail, "getJobDetail cannot be null!");
         mDetailView = checkNotNull(detailView, "detailView cannot be null!");
@@ -41,10 +41,10 @@ public class JobDetailPresenter implements JobDetailContract.Presenter {
             mDetailView.setLoadingIndicator(true);
         }
 
-        mUseCaseHandler.execute(mDetailJob, new GetJobDetail.RequestValues(jobId),
-                new UseCase.UseCaseCallback<GetJobDetail.ResponseValue>() {
+        mUseCaseHandler.execute(mDetailJob, new GetJob.RequestValues(jobId),
+                new UseCase.UseCaseCallback<GetJob.ResponseValue>() {
                     @Override
-                    public void onSuccess(GetJobDetail.ResponseValue response) {
+                    public void onSuccess(GetJob.ResponseValue response) {
                         Job job = response.getJob();
                         // The view may not be able to handle UI updates anymore
                         if (!mDetailView.isActive()) {

@@ -2,22 +2,26 @@ package com.tom.hunter.framework.data;
 
 import android.support.annotation.NonNull;
 
+import com.tom.hunter.framework.data.local.ILocalDataSource;
+import com.tom.hunter.framework.data.remote.IRemoteDataSource;
+import com.tom.hunter.framework.model.History;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Created by txu1 on 9/2/2016.
  */
-public class DataRepository implements IDataSource {
+public class DataRepository implements IRemoteDataSource, ILocalDataSource {
 
     private static DataRepository INSTANCE = null;
 
-    private final IDataSource mRemoteDataSource;
+    private final IRemoteDataSource mRemoteDataSource;
 
-    private final IDataSource mLocalDataSource;
+    private final ILocalDataSource mLocalDataSource;
 
     // Prevent direct instantiation.
-    private DataRepository(@NonNull IDataSource tasksRemoteDataSource,
-                           @NonNull IDataSource tasksLocalDataSource) {
+    private DataRepository(@NonNull IRemoteDataSource tasksRemoteDataSource,
+                           @NonNull ILocalDataSource tasksLocalDataSource) {
         mRemoteDataSource = checkNotNull(tasksRemoteDataSource);
         mLocalDataSource = checkNotNull(tasksLocalDataSource);
     }
@@ -29,8 +33,8 @@ public class DataRepository implements IDataSource {
      * @param localDataSource  the device storage data source
      * @return the {@link DataRepository} instance
      */
-    public static DataRepository getInstance(IDataSource remoteDataSource,
-                                             IDataSource localDataSource) {
+    public static DataRepository getInstance(IRemoteDataSource remoteDataSource,
+                                             ILocalDataSource localDataSource) {
         if (INSTANCE == null) {
             INSTANCE = new DataRepository(remoteDataSource, localDataSource);
         }
@@ -61,5 +65,17 @@ public class DataRepository implements IDataSource {
     public void getDetailCompany(GetCompanyCallback callback) {
         checkNotNull(callback);
         mRemoteDataSource.getDetailCompany(callback);
+    }
+
+    @Override
+    public void saveHistory(@NonNull History history) {
+        checkNotNull(history);
+        mLocalDataSource.saveHistory(history);
+    }
+
+    @Override
+    public void getSearchHistory(@NonNull LoadHistoryCallback callback) {
+        checkNotNull(callback);
+        mLocalDataSource.getSearchHistory(callback);
     }
 }

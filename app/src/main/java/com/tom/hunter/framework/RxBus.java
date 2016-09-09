@@ -10,11 +10,22 @@ import rx.subjects.Subject;
  */
 public class RxBus {
 
-    private static final RxBus instance = new RxBus();
+    private static volatile RxBus instance;
 
-    private final Subject<Object, Object> bus = new SerializedSubject<>(PublishSubject.create());
+    private final Subject<Object, Object> bus;
+
+    public RxBus() {
+        bus = new SerializedSubject<>(PublishSubject.create());
+    }
 
     public static RxBus getDefault() {
+        if (instance == null) {
+            synchronized (RxBus.class) {
+                if (instance == null) {
+                    instance = new RxBus();
+                }
+            }
+        }
         return instance;
     }
 
@@ -22,12 +33,8 @@ public class RxBus {
         bus.onNext(o);
     }
 
-    public Observable<Object> toObserverable() {
-        return bus;
-    }
-
-    public boolean hasObservers() {
-        return bus.hasObservers();
+    public Observable toObserverable(Class eventType) {
+        return bus.ofType(eventType);
     }
 
 }
