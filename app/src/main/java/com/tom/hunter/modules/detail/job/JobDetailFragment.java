@@ -179,6 +179,7 @@ public class JobDetailFragment extends Fragment implements JobDetailContract.Vie
         public Object instantiateItem(ViewGroup container, int position) {
             Context context = container.getContext();
             ImageView imageView = new ImageView(context);
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             container.addView(imageView);
 
             Photo photo = photos.get(position);

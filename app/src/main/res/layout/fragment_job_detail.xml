@@ -98,6 +98,7 @@
                     android:id="@+id/companyLogo"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/company_logo" />
 
                 <LinearLayout
